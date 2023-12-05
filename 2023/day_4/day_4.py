@@ -12,12 +12,14 @@ import numpy as np
 
 if __name__ == "__main__":
     f = open("test-input.txt")
-    #f = open("input.txt")
+    f = open("input.txt")
     Lines = f.readlines()
-    pattern = "Card {card:d}: {winners} | {hand}\n"
-
+    pattern = "Card {card}: {winners} | {hand}\n"
+    solution = 0 
     for line in Lines:
         line = aoc.line_dict(line, pattern)
+        print(line["card"])
         winners = aoc.int_array(line, "winners")
         hand = aoc.int_array(line, "hand")
-        print(int(np.floor(0.5 * 2**(len(set(winners) & set(hand))))))
+        solution += int(np.floor(0.5 * 2**(len(set(winners) & set(hand)))))
+    print(solution)
