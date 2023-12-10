@@ -13,52 +13,20 @@ import re
 
 if __name__ == "__main__":
     f = open("input.txt")
-    f = open("test-input.txt")
+    #f = open("test-input.txt")
     Lines = f.readlines()
     abs_line_len = []
     act_line_len = []
+    count1 = 0 
+    count2 = 0 
+    count3 = 0
     for line in Lines:
-        length = 0
-        line = line.strip()
         print(line)
-        abs_line_len.append(len(line))
-        line = line[1:-1]
-        skipper = 0
-        for _ in range(0, len(line)-1):
-            _ = skipper+_
-            if _ == len(line)-1:
-                length += 1
-                break
-            elif _ > len(line)-1:
-                break
-            
-            elif line[_] == "\\":
-                if line[_+1] == "x":
-                    s = line[_+2:_+4]
-                    #print("u'"+s+"'")
-                    #s = s.encode("utf-8")
-                    int(s, base=16)
-                    byte_string = bytes.fromhex(s) 
-                    ascii_string = byte_string.decode("ASCII")
-                    print(ascii_string)
-                    #print(len(ascii_string))
-                    #length += len(ascii_string)
-                    print(length)
-                    skipper +=3
-                    pass
-                else:
-                    print("some random escape")
-                    length += 1
-                    skipper += 2
-            else:
-                "normal escape"
-                length += 1
-                if _ == len(line)-2:
-                    length+=1
-        act_line_len.append(length)
-        #line = line.encode("utf-8")
-        #byte_string = bytes.fromhex(line)
-        #ascii_string = byte_string.decode("ASCII")  
-        #print(ascii_string)
-    print(abs_line_len, act_line_len) 
-    print(sum(abs_line_len) - sum(act_line_len)) 
+        print(eval(line))
+        count1 += len(line.strip())
+        count2 += len(eval(line))
+        quotes = line.strip().count('"')
+        backsl = line.strip().count('\\')
+        print(len(line.strip()) +  quotes +  backsl + 2)
+        count3 += (len(line.strip()) +  quotes + backsl + 2)
+    print(count3- count1)
