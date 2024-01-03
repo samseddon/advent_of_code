@@ -7,6 +7,7 @@ parent_dir = os.path.dirname(current_dir)
 uber_parent_dir = os.path.dirname(parent_dir)                                     
 sys.path.append(uber_parent_dir)                                                  
 import aoc_toolkit.equations as aoc 
+import time
 
 #'class Network():
 #'    def __init__(self, operators):
@@ -113,7 +114,7 @@ def query_value(wire, network):
         
 
 if __name__ == "__main__":
-     
+    time_s = time.time()
     operators = {"AND":"&",	
                  "OR":"|",	
                  "XOR":"^",	
@@ -142,3 +143,6 @@ if __name__ == "__main__":
     for wire in network:
         if wire == "a":
             print(wire, network[wire].value)
+    
+    print(time.time() - time_s)
+    
